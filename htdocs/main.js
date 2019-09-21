@@ -1,6 +1,7 @@
 window.app = new Vue({
     el: '#app',
     data: {
+        pageTitle: "RemanTe - Test App (Vue.js - PHP - MySQLi)",
         errorMsg: "",
 		successMsg: "",
 		showAddModal: false,
@@ -12,7 +13,10 @@ window.app = new Vue({
         currentSort:'product_name',
         currentSortDir:'asc',
         pageSize:5,
-        currentPage:1
+        currentPage:1,
+        search: '',
+        sortKey: '',
+        reverse: false
 	},
 	mounted: function(){
         this.getAllProducts();
@@ -55,6 +59,10 @@ window.app = new Vue({
 				}
 			});
         },
+        sortBy: function(sortKey) {
+            this.reverse = (this.sortKey == sortKey) ? ! this.reverse : false;
+            this.sortKey = sortKey;
+        },
         deleteProduct(){
 			var formData = app.toFormData(app.currentProduct);
 			//console.log(app.newProduct);
@@ -95,6 +103,21 @@ window.app = new Vue({
         },
         prevPage:function() {
             if(this.currentPage > 1) this.currentPage--;
+        },
+        csvExport(arrData) {
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += [
+              Object.keys(arrData[0]).join(";"),
+              ...arrData.map(item => Object.values(item).join(";"))
+            ]
+              .join("\n")
+              .replace(/(^\[)|(\]$)/gm, "");
+      
+            const data = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", data);
+            link.setAttribute("download", "export.csv");
+            link.click();
         }
     },
     computed:{
@@ -111,6 +134,11 @@ window.app = new Vue({
             let end = this.currentPage*this.pageSize;
             if(index >= start && index < end) return true;
             });
+        },
+        csvData() {
+            return this.sortedProducts.map(item => ({
+              ...item
+            }));
         }
     }
 });

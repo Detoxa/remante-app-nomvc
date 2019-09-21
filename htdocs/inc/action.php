@@ -61,7 +61,7 @@ if ($action == 'create') {
         $result['message'] = "Produkt přidán!";
     } else {
         $result['error'] = true;
-        $result['message'] = "Asi vít Máchale, něco je špatně!";
+        $result['message'] = "Asi vítr Máchale, něco je špatně!";
     }
 
 }
@@ -84,7 +84,7 @@ if ($action == 'update') {
         $result['message'] = "Produkt editován!";
     } else {
         $result['error'] = true;
-        $result['message'] = "Asi vít Máchale, něco je špatně!";
+        $result['message'] = "Asi vítr Máchale, něco je špatně!";
     }
 
 }
@@ -100,7 +100,7 @@ if ($action == 'delete') {
         $result['message'] = "Produkt smazán!";
     } else {
         $result['error'] = true;
-        $result['message'] = "Asi vít Máchale, něco je špatně!";
+        $result['message'] = "Asi vítr Máchale, něco je špatně!";
     }
 
 }

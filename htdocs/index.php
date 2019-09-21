@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf8_czech_ci">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>RemanTe - Test App</title>
+	<title>{{ pageTitle }}</title>
 	<meta name="description" content="Testovací app - Vue,PHP, MySqli">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Add this to <head> -->
@@ -34,9 +34,9 @@
 		<div class="containter-fluid">
 			<div class="row bg-green">
 				<div class="col-12">
-					<p class="text-center display-3">
-						RemanTe Test App - CRUD -> vue.js , php, MySQLi
-					</p>
+					<h1 class="text-center">
+						{{ pageTitle }}
+					</h1>
 				</div>
 			</div>
 		</div>
@@ -44,15 +44,18 @@
 		<div class="container">
 			<div class="row mt-3">
 				<div class="col-lg-6">
-					<h3 class="text-info mr-1">Produkty</h3>
+					<h3 class="mr-1">Produkty</h3>
 				</div>
 				<div class="col-lg-6">
-					<button class="btn btn-info float-right" @click="showAddModal=true">
+					<button class="btn btn-primary float-right" @click="showAddModal=true">
 						<i class="fas fa-box">&nbsp;&nbsp;Přidej produkt</i>
+					</button>
+					<button class="btn btn-secondary float-left" @click="csvExport(csvData)">
+						<i class="fas fa-file-csv">&nbsp;&nbsp;Export - CSV</i>
 					</button>
 				</div>
 			</div>
-			<hr class="bg-danger">
+			<hr class="bg-secondary">
 			<div class="alert alert-danger" v-if="errorMsg">
 				{{ errorMsg }}
 			</div>
@@ -63,7 +66,7 @@
 				<div class="col-lg-12">
 					<table class="table table-bordered table-striped">
 						<thead>
-							<tr class="text-center bg-secondary">
+							<tr class="text-center bg-light">
 								<th scope="col" @click="sort('product_name')">Název</th>
 								<th scope="col" @click="sort('product_id')">ID</th>
 								<th scope="col" @click="sort('product_description')">Popis</th>
@@ -76,7 +79,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="text-center" v-for="product in sortedProducts">
+							<tr class="text-center" v-for="product in sortedProducts" >
 								<td class="align-middle">{{ product.product_name }}</td>
 								<td class="align-middle">{{ product.product_id }}</td>
 								<td class="align-middle">{{ product.product_description }}</td>
@@ -88,15 +91,26 @@
 								<td class="align-middle"><a href="#" class="text-danger" @click="showDeleteModal=true; selectProduct(product)"><i class="fas fa-trash"></i></a></td>
 							</tr>
 						</tbody>
-						<p>
-							<button @click="prevPage">Předchozí</button>
-							<button @click="nextPage">Další</button>
-						</p>
-						<p>
-							Záznamů:
-							<input type="number" name="pageSize" class="imputPageSize" placeholder="Počet produktu" v-model="pageSize">
-						</p>
-						<!-- debug: sort={{currentSort}}, dir={{currentSortDir}} -->
+						<div class="row">
+							<div class="col">
+								<p>
+									<button @click="prevPage">Předchozí</button>
+									<button @click="nextPage">Další</button>
+								</p>
+							</div>
+							<div class="col">
+								<p>
+									Záznamů:
+									<input type="number" name="pageSize" class="imputPageSize" placeholder="Počet produktu" v-model="pageSize">
+								</p>
+							</div>
+							<div class="col">
+								<p>
+									<input type="text" placeholder="Search">
+								</p>
+								<!-- debug: sort={{currentSort}}, dir={{currentSortDir}} -->
+							</div>
+						</div>
 					</table>
 				</div>
 			</div>
@@ -168,7 +182,7 @@
 					<div class="modal-body p-4">
 						<form action="" method="post">
 							<div class="form-group">
-								<input type="text" name="name" class="form-control form-control-lg" v-model="currentProduct.product_name">
+								<input type="text" name="name" class="form-control form-control-lg" v-model="currentProduct.product_name" required>
 							</div>
 							<div class="form-group">
 								<input type="text" name="description" class="form-control form-control-lg" v-model="currentProduct.product_des">
