@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf8_czech_ci">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>{{ pageTitle }}</title>
+	<title>RemanTe - Test App (Vue.js - PHP - MySQLi)</title>
 	<meta name="description" content="Testovací app - Vue,PHP, MySqli">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Add this to <head> -->
@@ -79,7 +79,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="text-center" v-for="product in sortedProducts" >
+							<tr class="text-center" v-for="product in sortedProducts">
 								<td class="align-middle">{{ product.product_name }}</td>
 								<td class="align-middle">{{ product.product_id }}</td>
 								<td class="align-middle">{{ product.product_description }}</td>
@@ -106,7 +106,7 @@
 							</div>
 							<div class="col">
 								<p>
-									<input type="text" placeholder="Search">
+									<input type="text" placeholder="Hledej">
 								</p>
 								<!-- debug: sort={{currentSort}}, dir={{currentSortDir}} -->
 							</div>
