@@ -12,7 +12,7 @@ window.app = new Vue({
         currentProduct: {},
         currentSort:'product_name',
         currentSortDir:'asc',
-        pageSize:5,
+        pageSize:10,
         currentPage:1,
         search: '',
         sortKey: '',
@@ -24,7 +24,7 @@ window.app = new Vue({
 	},
 	methods: {
 		getAllProducts(){
-			axios.get("http://remante-app-nomvc.loc/inc/action.php?action=read").then(function(response){
+			axios.get("https://safarik.dev/action.php?action=read").then(function(response){
 				if(response.data.error){
 					app.errorMsg = response.data.message;
 				} else {
@@ -35,7 +35,7 @@ window.app = new Vue({
 		addProduct(){
 			var formData = app.toFormData(app.newProduct);
 			//console.log(app.newProduct);
-			axios.post("http://remante-app-nomvc.loc/inc/action.php?action=create", formData).then(function(response){
+			axios.post("https://safarik.dev/action.php?action=create", formData).then(function(response){
 				app.newProduct = {name: "", des: "", brand: "", category: "", ean: "", price: ""};
 				if(response.data.error){
 					app.errorMsg = response.data.message;
@@ -48,7 +48,7 @@ window.app = new Vue({
         updateProduct(){
 			var formData = app.toFormData(app.currentProduct);
 			//console.log(app.newProduct);
-			axios.post("http://remante-app-nomvc.loc/inc/action.php?action=update", formData).then(function(response){
+			axios.post("https://safarik.dev/action.php?action=update", formData).then(function(response){
                 app.currentProduct = {name: "", des: "", brand: "", category: "", ean: "", price: ""};
                 //console.log(app.currentProduct);
 				if(response.data.error){
@@ -66,7 +66,7 @@ window.app = new Vue({
         deleteProduct(){
 			var formData = app.toFormData(app.currentProduct);
 			//console.log(app.newProduct);
-			axios.post("http://remante-app-nomvc.loc/inc/action.php?action=delete", formData).then(function(response){
+			axios.post("https://safarik.dev/action.php?action=delete", formData).then(function(response){
                 app.currentProduct = {name: "", des: "", brand: "", category: "", ean: "", price: ""};
                 //console.log(app.currentProduct);
 				if(response.data.error){

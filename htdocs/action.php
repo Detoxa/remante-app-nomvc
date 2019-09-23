@@ -2,7 +2,7 @@
 
 header('Content-Type: application/json');
 
-$conn = mysqli_connect('172.16.238.12', 'root', '', 'remante_app');
+$conn = mysqli_connect('127.0.0.1', 'safarikdev001', '!wBtht4pL?W}dfZ/', 'safarikdev01');
         mysqli_set_charset($conn, "utf8");
     if($conn->connect_error){
         die("Connection Failed!" . $conn->connect_error);
